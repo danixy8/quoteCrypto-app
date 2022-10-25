@@ -8,6 +8,7 @@ import Spinner from './components/Spinner';
 const Container = styled.div`
   max-width: 900px;
   margin: 0 auto;
+  margin-bottom: 350px;
   width: 90%;
   @media (min-width: 992px){
     display: grid;
@@ -54,7 +55,7 @@ function App() {
       const quoteCrypto = async () => {
         setLoading(true)
         setResult({})
-        
+
         const {currency, cryptoCurrency} = currencies
         const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cryptoCurrency}&tsyms=${currency}`
         
@@ -63,11 +64,20 @@ function App() {
         setResult(result.DISPLAY[cryptoCurrency][currency])
 
         setLoading(false)
+        scroll()
       }
 
       quoteCrypto()
     }
   }, [currencies])
+
+  const scroll = () => {
+    window.scroll({
+      top: document.body.offsetHeight,
+      left: 0, 
+      behavior: 'smooth',
+    });
+  };
   
 
   return (
